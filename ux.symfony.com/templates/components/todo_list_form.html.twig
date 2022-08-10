@@ -39,15 +39,22 @@
                             }) }}
                         </td>
                         <td>
-                            <button data-action="live#action" data-action-name="removeItem(index={{ key }})" type="button" class="btn btn-outline-danger">X</button>
+                            {{ form_row(itemForm.vars.button_delete_prototype, { label: 'X', attr: itemForm.vars.button_delete_prototype.vars.attr|merge({
+                                'data-action': 'live#action',
+                                'data-action-name': 'removeCollectionItem(name=' ~ form.vars.full_name ~ ', index=' ~ itemForm.vars.name ~ ')',
+                                class: 'btn btn-outline-danger'
+                            }) }) }}
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        {% do form.todoItems.setRendered %}
-        <button data-action="live#action" data-action-name="addItem" type="button" class="btn btn-outline-primary">+ Add Item</button>
+        {{ form_widget(form.todoItems.vars.button_add_prototype, { label: '+ Add Item', attr: form.todoItems.vars.button_add_prototype.vars.attr|merge({
+            'data-action': 'live#action',
+            'data-action-name': 'addCollectionItem(name=' ~ form.vars.full_name ~ ')',
+            class: 'btn btn-outline-primary'
+        }) }) }}
+
         <button type="submit" class="btn btn-success" formnovalidate>Save</button>
-    {{ form_end(form) }}
 </div>
