@@ -2,6 +2,8 @@
     {{ attributes }}
 >
     {{ form_start(form) }}
+        {{ form_errors(form) }}
+
         <div class="row">
             <div class="col-4">
                 {{ form_row(form.name, {
@@ -18,6 +20,7 @@
                 <tr>
                     <td>Item</td>
                     <td>Priority</td>
+                    <td></td>
                 </tr>
             </thead>
             <tbody>
@@ -39,22 +42,20 @@
                             }) }}
                         </td>
                         <td>
-                            {{ form_row(itemForm.vars.button_delete_prototype, { label: 'X', attr: itemForm.vars.button_delete_prototype.vars.attr|merge({
-                                'data-action': 'live#action',
-                                'data-action-name': 'removeCollectionItem(name=' ~ form.vars.full_name ~ ', index=' ~ itemForm.vars.name ~ ')',
-                                class: 'btn btn-outline-danger'
-                            }) }) }}
+                            {{ form_row(itemForm.vars.button_delete, { label: 'X', attr: { class: 'btn btn-outline-danger' } }) }}
                         </td>
                     </tr>
                 {% endfor %}
+                {%- if form.todoItems.vars.errors|length > 0 -%}
+                    <tr>
+                        <td colspan='3'>{{ form_errors(form.todoItems) }}</td>
+                    </tr>
+                {%- endif -%}
             </tbody>
         </table>
 
-        {{ form_widget(form.todoItems.vars.button_add_prototype, { label: '+ Add Item', attr: form.todoItems.vars.button_add_prototype.vars.attr|merge({
-            'data-action': 'live#action',
-            'data-action-name': 'addCollectionItem(name=' ~ form.vars.full_name ~ ')',
-            class: 'btn btn-outline-primary'
-        }) }) }}
+        {{ form_widget(form.todoItems.vars.button_add, { label: '+ Add Item', attr: { class: 'btn btn-outline-primary' } }) }}
 
         <button type="submit" class="btn btn-success" formnovalidate>Save</button>
+    {{ form_end(form) }}
 </div>
