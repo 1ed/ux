@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Unreleased
+
+-   Add `ComponentAttributes::append` and `ComponentAttributes::prepend` to eg. prepend a stimulus
+    controller in templates like `<div {{ attributes.prepend(stimulus_controller('my-controller')) }}>`
+
 ## 2.7.0
 
 -   `PreMount` and `PostMount` hooks can now return nothing.
