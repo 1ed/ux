@@ -2129,7 +2129,7 @@ class SetValueOntoModelFieldsPlugin {
             if (component.valueStore.has(modelName)) {
                 setValueOnElement(element, component.valueStore.get(modelName));
             }
-            if (element instanceof HTMLSelectElement && !element.multiple) {
+            if (element instanceof HTMLSelectElement && !element.multiple && element.length > 0) {
                 component.valueStore.set(modelName, getValueFromElement(element, component.valueStore));
             }
         });
